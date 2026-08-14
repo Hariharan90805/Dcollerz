@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
           {/* Brand Logo */}
           <a href="#" className="focus:outline-none -ml-2 sm:-ml-4 transition-transform hover:scale-105">
             <Logo size="lg" />

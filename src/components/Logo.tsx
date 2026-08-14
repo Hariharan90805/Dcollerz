@@ -25,11 +25,7 @@ export const Logo: React.FC<LogoProps> = ({
       <img
         src="/logo.jpg"
         alt="Dcollaberz Logo"
-        className="object-contain rounded-[14px] border border-neutral-800 shadow-xl shadow-amber-500/10"
-        style={{
-          height: Math.min(currentSize.icon * 1.5, 72), // Increased max height to 72px to allow a much larger logo in the taller navbar
-          maxWidth: '100%',
-        }}
+        className="object-contain rounded-[10px] sm:rounded-[14px] border border-neutral-800 shadow-xl shadow-amber-500/10 h-10 sm:h-14 lg:h-[72px] w-auto"
       />
     </div>
   );
