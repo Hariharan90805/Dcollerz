@@ -46,7 +46,7 @@ export const FloatingWhatsAppWidget: React.FC = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-3 w-80 sm:w-96 rounded-3xl bg-neutral-900 border border-emerald-500/40 shadow-2xl overflow-hidden text-white"
+            className="mb-3 w-[calc(100vw-2rem)] sm:w-96 rounded-3xl bg-neutral-900 border border-emerald-500/40 shadow-2xl overflow-hidden text-white"
           >
             {/* Header */}
             <div className="p-4 bg-gradient-to-r from-emerald-950 via-neutral-900 to-emerald-950 border-b border-emerald-500/30 flex items-center justify-between">
