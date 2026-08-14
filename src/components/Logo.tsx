@@ -2,9 +2,9 @@ import React from 'react';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  showTagline?: boolean;
   className?: string;
-  variant?: 'gold' | 'dark' | 'minimal';
+  showTagline?: boolean; // keep to avoid type errors in other files
+  variant?: 'gold' | 'dark' | 'minimal'; // keep to avoid type errors in other files
 }
 
 export const Logo: React.FC<LogoProps> = ({
@@ -12,10 +12,10 @@ export const Logo: React.FC<LogoProps> = ({
   className = '',
 }) => {
   const sizeMap = {
-    sm: { icon: 34, text: 'text-lg', sub: 'text-[9px]' },
-    md: { icon: 44, text: 'text-xl', sub: 'text-[10px]' },
-    lg: { icon: 58, text: 'text-2xl', sub: 'text-xs' },
-    xl: { icon: 76, text: 'text-4xl', sub: 'text-sm' },
+    sm: { icon: 34 },
+    md: { icon: 44 },
+    lg: { icon: 58 },
+    xl: { icon: 76 },
   };
 
   const currentSize = sizeMap[size];
@@ -25,11 +25,10 @@ export const Logo: React.FC<LogoProps> = ({
       <img
         src="/logo.jpg"
         alt="Dcollaberz Logo"
-        className="object-contain"
+        className="object-contain mix-blend-screen"
         style={{
-          height: currentSize.icon * 1.5, // Make it a bit larger since it contains text
+          height: currentSize.icon * 1.5,
           maxWidth: '100%',
-          borderRadius: '8px'
         }}
       />
     </div>
