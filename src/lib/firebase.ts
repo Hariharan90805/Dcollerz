@@ -1,36 +1,5 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  limit,
-  onSnapshot,
-  serverTimestamp,
-  type Unsubscribe,
-} from 'firebase/firestore';
-import firebaseConfigData from '../../firebase-applet-config.json';
+// Firebase SDK has been removed for Cloudflare deployment
 
-const firebaseConfig = {
-  apiKey: firebaseConfigData.apiKey,
-  authDomain: firebaseConfigData.authDomain,
-  projectId: firebaseConfigData.projectId,
-  storageBucket: firebaseConfigData.storageBucket,
-  messagingSenderId: firebaseConfigData.messagingSenderId,
-  appId: firebaseConfigData.appId,
-};
-
-// Initialize Firebase client safely
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-
-// Initialize Firestore with custom database ID from config if available
-export const db = firebaseConfigData.firestoreDatabaseId
-  ? getFirestore(app, firebaseConfigData.firestoreDatabaseId)
-  : getFirestore(app);
-
-// 1. Lead / Strategy Inquiries Collection
 export interface DbLead {
   id?: string;
   clientName: string;
@@ -46,21 +15,10 @@ export interface DbLead {
 }
 
 export async function saveLeadToDb(lead: Omit<DbLead, 'id' | 'createdAt'>) {
-  try {
-    const leadsRef = collection(db, 'leads');
-    const docRef = await addDoc(leadsRef, {
-      ...lead,
-      status: lead.status || 'NEW_INQUIRY',
-      createdAt: serverTimestamp(),
-    });
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error('Error saving lead to Firestore:', error);
-    return { success: false, error };
-  }
+  console.log('Mock: saveLeadToDb', lead);
+  return { success: true, id: 'mock-id-' + Date.now() };
 }
 
-// 2. Transactions / Subscriptions Collection
 export interface DbTransaction {
   id?: string;
   orderId: string;
@@ -81,20 +39,10 @@ export interface DbTransaction {
 }
 
 export async function saveTransactionToDb(txn: Omit<DbTransaction, 'id' | 'timestamp'>) {
-  try {
-    const txnsRef = collection(db, 'transactions');
-    const docRef = await addDoc(txnsRef, {
-      ...txn,
-      timestamp: serverTimestamp(),
-    });
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error('Error saving transaction to Firestore:', error);
-    return { success: false, error };
-  }
+  console.log('Mock: saveTransactionToDb', txn);
+  return { success: true, id: 'mock-id-' + Date.now() };
 }
 
-// 3. Visitor Tracking Collection
 export interface DbVisitor {
   id?: string;
   city: string;
@@ -105,20 +53,10 @@ export interface DbVisitor {
 }
 
 export async function logVisitorToDb(visitor: Omit<DbVisitor, 'id' | 'timestamp'>) {
-  try {
-    const visitorsRef = collection(db, 'visitors');
-    const docRef = await addDoc(visitorsRef, {
-      ...visitor,
-      timestamp: serverTimestamp(),
-    });
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error('Error logging visitor to Firestore:', error);
-    return { success: false, error };
-  }
+  console.log('Mock: logVisitorToDb', visitor);
+  return { success: true, id: 'mock-id-' + Date.now() };
 }
 
-// 4. Reviews & Testimonials Collection
 export interface DbReview {
   id?: string;
   name: string;
@@ -135,33 +73,15 @@ export interface DbReview {
 }
 
 export async function saveReviewToDb(review: Omit<DbReview, 'id' | 'createdAt'>) {
-  try {
-    const reviewsRef = collection(db, 'reviews');
-    const docRef = await addDoc(reviewsRef, {
-      ...review,
-      verified: review.verified !== undefined ? review.verified : true,
-      createdAt: serverTimestamp(),
-    });
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error('Error saving review to Firestore:', error);
-    return { success: false, error };
-  }
+  console.log('Mock: saveReviewToDb', review);
+  return { success: true, id: 'mock-id-' + Date.now() };
 }
 
 export async function fetchReviewsFromDb(): Promise<DbReview[]> {
-  try {
-    const reviewsRef = collection(db, 'reviews');
-    const q = query(reviewsRef, orderBy('createdAt', 'desc'), limit(30));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as DbReview));
-  } catch (error) {
-    console.error('Error fetching reviews from Firestore:', error);
-    return [];
-  }
+  console.log('Mock: fetchReviewsFromDb');
+  return [];
 }
 
-// 5. Real-Time Notification Stream Collection
 export interface DbNotification {
   id?: string;
   type: string;
@@ -173,41 +93,19 @@ export interface DbNotification {
 }
 
 export async function logNotificationToDb(notification: Omit<DbNotification, 'id' | 'timestamp'>) {
-  try {
-    const notifsRef = collection(db, 'notifications');
-    const docRef = await addDoc(notifsRef, {
-      ...notification,
-      timestamp: serverTimestamp(),
-    });
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error('Error logging notification to Firestore:', error);
-    return { success: false, error };
-  }
+  console.log('Mock: logNotificationToDb', notification);
+  return { success: true, id: 'mock-id-' + Date.now() };
 }
+
+export type Unsubscribe = () => void;
 
 export function subscribeToNotifications(
   callback: (notifications: DbNotification[]) => void
 ): Unsubscribe {
-  const notifsRef = collection(db, 'notifications');
-  const q = query(notifsRef, orderBy('timestamp', 'desc'), limit(50));
-  
-  return onSnapshot(
-    q,
-    (snapshot) => {
-      const items = snapshot.docs.map((doc) => {
-        const data = doc.data();
-        const ts = data.timestamp?.toDate ? data.timestamp.toDate().toISOString() : new Date().toISOString();
-        return {
-          id: doc.id,
-          ...data,
-          timestamp: ts,
-        } as DbNotification;
-      });
-      callback(items);
-    },
-    (err) => {
-      console.error('Firestore notifications listener error:', err);
-    }
-  );
+  console.log('Mock: subscribeToNotifications');
+  // Return dummy empty list
+  callback([]);
+  return () => {
+    console.log('Mock: unsubscribe');
+  };
 }
