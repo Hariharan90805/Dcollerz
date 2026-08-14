@@ -19,7 +19,7 @@ import {
 import { PricingTier } from '../types';
 import { BRAND_INFO } from '../data';
 import { Logo } from './Logo';
-import { saveTransactionToDb, logNotificationToDb } from '../lib/firebase';
+import { saveTransactionToDb, logNotificationToDb } from '../lib/analytics';
 
 interface CheckoutModalProps {
   isOpen: boolean;

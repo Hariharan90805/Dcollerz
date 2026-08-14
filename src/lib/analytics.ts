@@ -1,4 +1,4 @@
-// Firebase SDK has been removed for Cloudflare deployment
+// Analytics SDK Client (Mocked for static build)
 
 export interface DbLead {
   id?: string;

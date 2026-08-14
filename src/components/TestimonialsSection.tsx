@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { TESTIMONIALS } from '../data';
 import { Testimonial } from '../types';
-import { saveReviewToDb, fetchReviewsFromDb, logNotificationToDb } from '../lib/firebase';
+import { saveReviewToDb, fetchReviewsFromDb, logNotificationToDb } from '../lib/analytics';
 import { BRAND_INFO } from '../data';
 
 export const TestimonialsSection: React.FC = () => {

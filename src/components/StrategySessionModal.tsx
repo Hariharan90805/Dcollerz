@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { BRAND_INFO } from '../data';
 import { Logo } from './Logo';
-import { saveLeadToDb, logNotificationToDb } from '../lib/firebase';
+import { saveLeadToDb, logNotificationToDb } from '../lib/analytics';
 
 interface StrategySessionModalProps {
   isOpen: boolean;

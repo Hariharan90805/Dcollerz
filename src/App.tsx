@@ -17,7 +17,7 @@ import { NotificationCenterModal } from './components/NotificationCenterModal';
 import { FloatingWhatsAppWidget } from './components/FloatingWhatsAppWidget';
 import { PricingTier } from './types';
 import { PRICING_TIERS, BRAND_INFO } from './data';
-import { logVisitorToDb, logNotificationToDb, subscribeToNotifications } from './lib/firebase';
+import { logVisitorToDb, logNotificationToDb, subscribeToNotifications } from './lib/analytics';
 
 export function App() {
   // Modal states
