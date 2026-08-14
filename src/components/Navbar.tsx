@@ -94,17 +94,17 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
           {/* Brand Logo */}
-          <a href="#" className="focus:outline-none -ml-2 sm:-ml-4 transition-transform hover:scale-105">
+          <a href="#" className="flex-shrink-0 focus:outline-none -ml-2 sm:-ml-4 transition-transform hover:scale-105">
             <Logo size="lg" />
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="hidden xl:flex items-center gap-6 ml-4">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-neutral-300 hover:text-amber-300 transition-colors py-1 relative group"
+                className="text-sm font-medium text-neutral-300 hover:text-amber-300 transition-colors py-1 relative group whitespace-nowrap"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300" />
@@ -113,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             {/* Live Notification Indicator Button */}
             <button
               onClick={onOpenNotificationCenter}
@@ -151,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="flex sm:hidden items-center gap-2">
+          <div className="flex xl:hidden items-center gap-2">
             <button
               onClick={onOpenNotificationCenter}
               className="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-amber-400"
@@ -170,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-t border-neutral-800 bg-neutral-950 px-4 pt-3 pb-6 space-y-3">
+        <div className="xl:hidden border-t border-neutral-800 bg-neutral-950 px-4 pt-3 pb-6 space-y-3">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <a
