@@ -38,8 +38,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTier }) 
 
   return (
     <section className="py-20 lg:py-28 bg-neutral-950 text-white relative overflow-hidden" id="pricing">
-      {/* Background Accent Gradients */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-amber-500/5 blur-[160px] pointer-events-none" />
+      {/* Dynamic Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] sm:w-[800px] h-[150vw] sm:h-[400px] bg-amber-500/5 blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

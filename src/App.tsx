@@ -2,22 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { ClientLogos } from './components/ClientLogos';
 import { WhyDigitalMarketingSection } from './components/WhyDigitalMarketingSection';
-import { DigitalMarketing3DShowcase } from './components/DigitalMarketing3DShowcase';
-import { GrowthMetricsComparison } from './components/GrowthMetricsComparison';
 import { ServicesSection } from './components/ServicesSection';
 import { FunnelSection } from './components/FunnelSection';
 import { PricingSection } from './components/PricingSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
-import { AiGrowthAdvisor } from './components/AiGrowthAdvisor';
 import { Footer } from './components/Footer';
-import { CheckoutModal } from './components/CheckoutModal';
-import { StrategySessionModal } from './components/StrategySessionModal';
-import { NotificationCenterModal } from './components/NotificationCenterModal';
 import { FloatingWhatsAppWidget } from './components/FloatingWhatsAppWidget';
 import { PricingTier } from './types';
 import { PRICING_TIERS, BRAND_INFO } from './data';
 import { logVisitorToDb, logNotificationToDb, subscribeToNotifications } from './lib/analytics';
+import { GrowthMetricsComparison } from './components/GrowthMetricsComparison';
+
+// Lazy loaded components for performance optimization
+const DigitalMarketing3DShowcase = React.lazy(() => import('./components/DigitalMarketing3DShowcase').then(m => ({ default: m.DigitalMarketing3DShowcase })));
+const AiGrowthAdvisor = React.lazy(() => import('./components/AiGrowthAdvisor').then(m => ({ default: m.AiGrowthAdvisor })));
+const CheckoutModal = React.lazy(() => import('./components/CheckoutModal').then(m => ({ default: m.CheckoutModal })));
+const StrategySessionModal = React.lazy(() => import('./components/StrategySessionModal').then(m => ({ default: m.StrategySessionModal })));
+const NotificationCenterModal = React.lazy(() => import('./components/NotificationCenterModal').then(m => ({ default: m.NotificationCenterModal })));
+
 
 export function App() {
   // Modal states
@@ -157,118 +161,126 @@ export function App() {
         />
       </motion.div>
 
-      {/* Why Digital Marketing Matters Today (Slide 2, 3, 4, 9) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <WhyDigitalMarketingSection />
-      </motion.div>
+      {/* Main lazy loaded content below hero */}
+      <React.Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-neutral-950 text-amber-400">Loading...</div>}>
+        {/* Trusted Logos (Marquee) */}
+        <ClientLogos />
 
-      {/* 3D Scroll-Linked Digital Marketing Ecosystem & Video Showcase */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <DigitalMarketing3DShowcase onOpenStrategyModal={() => setStrategyModalOpen(true)} />
-      </motion.div>
+        {/* 3D Scroll-Linked Digital Marketing Ecosystem & Video Showcase */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <DigitalMarketing3DShowcase onOpenStrategyModal={() => setStrategyModalOpen(true)} />
+        </motion.div>
 
-      {/* 30-Day Growth Metrics Comparison & Opportunity Funnel (Slide 6, 7, 8) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <GrowthMetricsComparison />
-      </motion.div>
+        {/* Why Digital Marketing Matters Today (Slide 2, 3, 4, 9) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <WhyDigitalMarketingSection />
+        </motion.div>
 
-      {/* 7 Core Services & 5-Stage Customer Journey Matrix (Slide 4, 10) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <ServicesSection onOpenStrategyModal={() => setStrategyModalOpen(true)} />
-      </motion.div>
+        {/* 7 Core Services & 5-Stage Customer Journey Matrix (Slide 4, 10) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <ServicesSection onOpenStrategyModal={() => setStrategyModalOpen(true)} />
+        </motion.div>
 
-      {/* 4-Tier Lead Generation Funnel with BI & SQL Dashboard Simulation (Slide 11) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <FunnelSection />
-      </motion.div>
+        {/* Growth Packages & Instant Online Checkout (Slide 11) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <PricingSection onSelectTier={handleSelectTier} />
+        </motion.div>
 
-      {/* Growth Packages & Instant Online Checkout (Slide 11) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <PricingSection onSelectTier={handleSelectTier} />
-      </motion.div>
+        {/* 30-Day Growth Metrics Comparison & Opportunity Funnel (Slide 6, 7, 8) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <GrowthMetricsComparison />
+        </motion.div>
 
-      {/* AI Marketing Audit & 30-Day Blueprint Generator (Gemini 3.7 Flash) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <AiGrowthAdvisor />
-      </motion.div>
+        {/* Verified Client Reviews & Results (REVIEW) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <TestimonialsSection />
+        </motion.div>
 
-      {/* Verified Client Reviews & Results */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
-      >
-        <TestimonialsSection />
-      </motion.div>
+        {/* 4-Tier Lead Generation Funnel with BI & SQL Dashboard Simulation (Slide 11) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <FunnelSection />
+        </motion.div>
 
-      {/* Footer with Branding & Slide 12 Call to Action */}
-      <Footer
-        onOpenStrategyModal={() => setStrategyModalOpen(true)}
-        onOpenNotificationCenter={() => setNotificationModalOpen(true)}
-      />
+        {/* AI Marketing Audit & 30-Day Blueprint Generator (Gemini 3.7 Flash) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <AiGrowthAdvisor />
+        </motion.div>
 
-      {/* Floating WhatsApp Live Connect Widget */}
-      <FloatingWhatsAppWidget />
 
-      {/* Checkout Modal with Spring Animations */}
-      <CheckoutModal
-        isOpen={checkoutModalOpen}
-        onClose={() => setCheckoutModalOpen(false)}
-        tier={selectedTier}
-        billingCycle={selectedBillingCycle}
-        onPaymentSuccess={handlePaymentSuccess}
-      />
 
-      {/* Strategy Session Booking Modal with Spring Animations */}
-      <StrategySessionModal
-        isOpen={strategyModalOpen}
-        onClose={() => setStrategyModalOpen(false)}
-        onLeadSuccess={handleLeadSuccess}
-      />
+        {/* Footer with Branding & Slide 12 Call to Action */}
+        <Footer
+          onOpenStrategyModal={() => setStrategyModalOpen(true)}
+          onOpenNotificationCenter={() => setNotificationModalOpen(true)}
+        />
 
-      {/* Real-time Notification Center Modal */}
-      <NotificationCenterModal
-        isOpen={notificationModalOpen}
-        onClose={() => setNotificationModalOpen(false)}
-        notifications={notifications}
-        onRefresh={fetchNotifications}
-      />
+        {/* Floating WhatsApp Live Connect Widget */}
+        <FloatingWhatsAppWidget />
+
+        {/* Checkout Modal with Spring Animations */}
+        <CheckoutModal
+          isOpen={checkoutModalOpen}
+          onClose={() => setCheckoutModalOpen(false)}
+          tier={selectedTier}
+          billingCycle={selectedBillingCycle}
+          onPaymentSuccess={handlePaymentSuccess}
+        />
+
+        {/* Strategy Session Booking Modal with Spring Animations */}
+        <StrategySessionModal
+          isOpen={strategyModalOpen}
+          onClose={() => setStrategyModalOpen(false)}
+          onLeadSuccess={handleLeadSuccess}
+        />
+
+        {/* Real-time Notification Center Modal */}
+        <NotificationCenterModal
+          isOpen={notificationModalOpen}
+          onClose={() => setNotificationModalOpen(false)}
+          notifications={notifications}
+          onRefresh={fetchNotifications}
+        />
+      </React.Suspense>
     </motion.div>
   );
 }

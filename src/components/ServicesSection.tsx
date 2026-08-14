@@ -78,7 +78,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenStrategy
   return (
     <section className="py-20 lg:py-28 bg-neutral-950 text-white relative overflow-hidden" id="services">
       {/* Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-emerald-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[150vw] sm:w-[600px] h-[100vw] sm:h-[350px] bg-emerald-600/10 blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

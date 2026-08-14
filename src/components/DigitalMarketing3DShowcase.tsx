@@ -217,8 +217,8 @@ export const DigitalMarketing3DShowcase: React.FC<DigitalMarketing3DShowcaseProp
       style={{ perspective: 1400 }}
     >
       {/* Dynamic Ambient 3D Depth Lights */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[150vw] sm:w-[500px] h-[150vw] sm:h-[500px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[150vw] sm:w-[500px] h-[150vw] sm:h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
       
       {/* 3D Wireframe Perspective Grid overlay in background */}
       <div 

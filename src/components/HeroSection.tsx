@@ -84,13 +84,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Background Animated Gradient Mesh */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div 
-          className="absolute -top-[20%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-emerald-600/10 blur-[130px] transition-transform duration-700"
+          className="absolute -top-[20%] -left-[10%] w-[150vw] sm:w-[55vw] h-[150vw] sm:h-[55vw] rounded-full bg-emerald-600/10 blur-[130px] transition-transform duration-700"
           style={{
             transform: `translate(${mousePos.x * 40}px, ${mousePos.y * 40}px)`,
           }}
         />
         <div 
-          className="absolute -bottom-[20%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-amber-500/10 blur-[140px] transition-transform duration-700"
+          className="absolute -bottom-[20%] -right-[10%] w-[150vw] sm:w-[50vw] h-[150vw] sm:h-[50vw] rounded-full bg-amber-500/10 blur-[140px] transition-transform duration-700"
           style={{
             transform: `translate(${mousePos.x * -35}px, ${mousePos.y * -35}px)`,
           }}
@@ -275,7 +275,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
 
               {/* Center 3D Luxury Badge Display */}
-              <div className="absolute inset-0 m-auto w-[240px] h-[240px] flex flex-col items-center justify-center">
+              <div className="absolute inset-0 m-auto w-full max-w-[240px] h-[240px] flex flex-col items-center justify-center">
                 {/* Holographic Glowing Base */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-emerald-500/15 to-transparent blur-xl animate-pulse" />
 

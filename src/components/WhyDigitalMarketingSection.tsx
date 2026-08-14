@@ -174,59 +174,8 @@ export const WhyDigitalMarketingSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Problems vs Solutions Matrix (Slide 4) */}
-        <div className="mb-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3">
-              <span>Slide 04 • Problems & Solutions</span>
-            </div>
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-white">
-              Problems Local Businesses Face vs. What Digital Marketing Solves
-            </h3>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-            {PROBLEMS_VS_SOLUTIONS.map((item, idx) => (
-              <motion.div
-                key={item.problem}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="p-5 rounded-2xl bg-neutral-900/70 border border-neutral-800 hover:border-neutral-700 flex flex-col justify-between space-y-4 transition-all"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-rose-400 text-xs font-bold uppercase tracking-wider">
-                    <AlertTriangle className="w-4 h-4 shrink-0" />
-                    <span>Problem #{idx + 1}</span>
-                  </div>
-                  <h4 className="text-sm font-bold text-white">{item.problem}</h4>
-                  <p className="text-xs text-neutral-400">{item.problemDesc}</p>
-                </div>
-
-                <div className="pt-4 border-t border-neutral-800/80 space-y-2">
-                  <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                    <CheckCircle className="w-4 h-4 shrink-0" />
-                    <span>DCOLLABERZ Fix</span>
-                  </div>
-                  <p className="text-xs font-semibold text-neutral-200">{item.solution}</p>
-                  <span className="inline-block text-[11px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
-                    {item.impact}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
         {/* 9 Pillars of Digital Marketing (Slide 9) */}
-        <div>
+        <div className="mb-24">
           <motion.div 
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -295,6 +244,57 @@ export const WhyDigitalMarketingSection: React.FC = () => {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+
+        {/* Problems vs Solutions Matrix (Slide 4) */}
+        <div>
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3">
+              <span>Slide 04 • Problems & Solutions</span>
+            </div>
+            <h3 className="text-2xl sm:text-4xl font-extrabold text-white">
+              Problems Local Businesses Face vs. What Digital Marketing Solves
+            </h3>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+            {PROBLEMS_VS_SOLUTIONS.map((item, idx) => (
+              <motion.div
+                key={item.problem}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="p-5 rounded-2xl bg-neutral-900/70 border border-neutral-800 hover:border-neutral-700 flex flex-col justify-between space-y-4 transition-all"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-rose-400 text-xs font-bold uppercase tracking-wider">
+                    <AlertTriangle className="w-4 h-4 shrink-0" />
+                    <span>Problem #{idx + 1}</span>
+                  </div>
+                  <h4 className="text-sm font-bold text-white">{item.problem}</h4>
+                  <p className="text-xs text-neutral-400">{item.problemDesc}</p>
+                </div>
+
+                <div className="pt-4 border-t border-neutral-800/80 space-y-2">
+                  <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                    <CheckCircle className="w-4 h-4 shrink-0" />
+                    <span>DCOLLABERZ Fix</span>
+                  </div>
+                  <p className="text-xs font-semibold text-neutral-200">{item.solution}</p>
+                  <span className="inline-block text-[11px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
+                    {item.impact}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
